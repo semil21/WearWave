@@ -70,3 +70,30 @@ export const updateCategory = expressAsyncHandler(
     }
   },
 );
+
+export const updateCategoryStatus = expressAsyncHandler(
+  async (req: Request, res: Response) => {
+    try {
+      const { categoryId } = req.params;
+      const { status } = req.body;
+
+      const updatedStatus = status === true ? false : true;
+
+      const updateCategoryRecordStatus = await Category.findByIdAndUpdate(
+        { _id: categoryId },
+        { status: updatedStatus },
+        { new: true },
+      );
+
+      if (updateCategoryRecordStatus) {
+        res.status(200).send({ response: updateCategoryRecordStatus?.status });
+      } else {
+        res.status(400).send({ response: "Failed to update category status" });
+      }
+    } catch (error) {
+      res
+        .status(500)
+        .send({ response: "Server error, failed to update category status" });
+    }
+  },
+);
