@@ -1,11 +1,19 @@
 import mongoose from "mongoose";
 
 const productSizeSchema = new mongoose.Schema({
+  product: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Product",
+  },
   size: {
     type: String,
     require: true,
   },
   quantity: {
+    type: Number,
+    require: true,
+  },
+  price: {
     type: Number,
     require: true,
   },
