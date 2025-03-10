@@ -6,7 +6,7 @@ const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers.authorization;
 
     if (!token) {
-      res.status(400).send({ response: "Token not found" });
+      return res.status(400).send({ response: "Token not found" });
     }
 
     const jwtSecretKet = process.env.JWT_SECRET_KEY;
