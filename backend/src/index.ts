@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 
 import adminRouter from "./route/admin/admin/admin.route";
 import adminCategoryRouter from "./route/admin/category/category.route";
-import adminProductRouter from "./route/admin/product/product.rout";
+import adminProductRouter from "./route/admin/product/product/product.route";
 
 dotenv.config();
 

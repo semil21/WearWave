@@ -1,6 +1,6 @@
 import expressAsyncHandler from "express-async-handler";
-import Product from "../../../schema/admin/product/product.schema";
 import { Request, Response } from "express";
+import Product from "../../../../schema/admin/product/product/product.schema";
 
 export const createNewProduct = expressAsyncHandler(
   async (req: Request, res: Response) => {
