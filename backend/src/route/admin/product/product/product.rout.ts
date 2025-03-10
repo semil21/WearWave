@@ -1,11 +1,11 @@
 import express from "express";
-import verifyToken from "../../../middleware/admin.middleware";
+import verifyToken from "../../../../middleware/admin.middleware";
 import {
   createNewProduct,
   getAllProducts,
   updateProduct,
   updateProductStatus,
-} from "../../../controller/admin/product/product.controller";
+} from "../../../../controller/admin/product/product/product.controller";
 
 const adminProductRouter = express.Router();
 
