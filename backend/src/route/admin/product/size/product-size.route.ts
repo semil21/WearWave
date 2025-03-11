@@ -2,6 +2,8 @@ import express from "express";
 import {
   getAllSizesOfProduct,
   saveNewProductSize,
+  updateProductSize,
+  updateProductSizeStatus,
 } from "../../../../controller/admin/product/size/product-size.controller";
 import verifyToken from "../../../../middleware/admin.middleware";
 
@@ -14,5 +16,13 @@ productSizeRouter.get(
 );
 
 productSizeRouter.post("/create", verifyToken, saveNewProductSize);
+
+productSizeRouter.put("/update/:productId", verifyToken, updateProductSize);
+
+productSizeRouter.put(
+  "/update-status/:productId",
+  verifyToken,
+  updateProductSizeStatus,
+);
 
 export default productSizeRouter;

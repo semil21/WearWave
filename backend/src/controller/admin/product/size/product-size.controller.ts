@@ -43,3 +43,57 @@ export const getAllSizesOfProduct = expressAsyncHandler(
     }
   },
 );
+
+export const updateProductSize = expressAsyncHandler(
+  async (req: Request, res: Response) => {
+    try {
+      const { productId } = req.params;
+
+      const updateProductRecord = await ProductSize.findByIdAndUpdate(
+        { _id: productId },
+        req.body,
+        { new: true },
+      );
+
+      if (updateProductRecord) {
+        res.status(200).send({ response: updateProductRecord });
+      } else {
+        res.status(400).send({ response: "Failed to update product size" });
+      }
+    } catch (error) {
+      res
+        .status(500)
+        .send({ response: "Server error, failed to update product size" });
+    }
+  },
+);
+
+export const updateProductSizeStatus = expressAsyncHandler(
+  async (req: Request, res: Response) => {
+    try {
+      const { productId } = req.params;
+
+      const { status } = req.body;
+
+      const updatedStatus = status === true ? false : true;
+
+      const updateStatus = await ProductSize.findByIdAndUpdate(
+        { _id: productId },
+        { status: updatedStatus },
+        { new: true },
+      );
+
+      if (updateStatus) {
+        res.status(200).send({ response: updateStatus?.status });
+      } else {
+        res
+          .status(400)
+          .send({ response: "Failed to update product size status" });
+      }
+    } catch (error) {
+      res.status(500).send({
+        response: "Server error, failed to update product size status",
+      });
+    }
+  },
+);
