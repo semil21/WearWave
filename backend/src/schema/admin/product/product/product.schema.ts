@@ -9,6 +9,11 @@ const productSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category",
   },
+  gender: {
+    type: String,
+    enum: ["male", 'female, "unisex'],
+    require: true,
+  },
   status: {
     type: Boolean,
     default: true,
