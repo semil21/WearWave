@@ -5,6 +5,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const Login = () => {
   const {
@@ -15,12 +17,23 @@ const Login = () => {
 
   const { mutate, isPending } = useLoginHook();
 
+  const router = useRouter();
+
+  useEffect(() => {
+    if (localStorage.getItem("session_id")) {
+      router.push("/dashboard");
+    }
+  }, []);
   const onSubmit = async (data: loginType) => {
     mutate(data, {
-      onSuccess: () => {
-        toast.success("Logged in successfully! Welcome Back.", {
+      onSuccess: (response) => {
+        localStorage.setItem("session_id", response?.auth_token);
+        toast.success(" Welcome Back!", {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 1500,
+          onClose: () => {
+            router.push("/dashboard");
+          },
         });
       },
       onError: (error: unknown) => {
@@ -89,7 +102,7 @@ const Login = () => {
               className="w-full bg-blue-500 text-white py-2 rounded-md text-lg hover:bg-blue-600 transition duration-300"
               disabled={isPending}
             >
-              {isPending ? "Logging in" : "Login"}
+              Login
             </button>
           </form>
         </div>
