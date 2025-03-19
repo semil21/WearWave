@@ -40,7 +40,7 @@ export const adminLogin = expressAsyncHandler(
       const verifyEmail = await Admin.findOne({ email: email });
 
       if (!verifyEmail) {
-        res.status(200).send({ response: "Email not found" });
+        return res.status(400).send({ response: "Email not found" });
       }
 
       const saltRounds = 10;
@@ -51,9 +51,7 @@ export const adminLogin = expressAsyncHandler(
       );
 
       if (!verifyPassword) {
-        res
-          .status(200)
-          .send({ response: "Incorrect password, please try again." });
+        return res.status(400).send({ response: "Incorrect password." });
       }
 
       const JwtSecretKey = process.env.JWT_SECRET_KEY;

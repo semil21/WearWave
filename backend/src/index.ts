@@ -1,6 +1,7 @@
 import connectDatabase from "./database/database";
 import Express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 
 import adminRouter from "./route/admin/admin/admin.route";
 import adminCategoryRouter from "./route/admin/category/category.route";
@@ -13,6 +14,7 @@ dotenv.config();
 
 const app = Express();
 app.use(Express.json());
+app.use(cors());
 
 // admin routes
 app.use("/admin", adminRouter);
