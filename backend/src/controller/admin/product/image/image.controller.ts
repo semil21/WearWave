@@ -6,13 +6,14 @@ import mongoose from "mongoose";
 export const saveNewImage = expressAsyncHandler(
   async (req: Request, res: Response) => {
     try {
-      const saveImageRecord = await Image.create(req.body);
+      res.send({ response: "working" });
+      // const saveImageRecord = await Image.create(req.body);
 
-      if (saveImageRecord) {
-        res.status(200).send({ response: saveImageRecord });
-      } else {
-        res.status(400).send({ response: "Failed to save new image" });
-      }
+      // if (saveImageRecord) {
+      //   res.status(200).send({ response: saveImageRecord });
+      // } else {
+      //   res.status(400).send({ response: "Failed to save new image" });
+      // }
     } catch (error) {
       res
         .status(500)
